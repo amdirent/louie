@@ -25,5 +25,8 @@
   "peerDependencies": {
     "react": "^16.10.0",
     "react-dom": "^16.8.6"
+  },
+  "dependencies": {
+    "immutability-helper": "^3.0.1"
   }
 }

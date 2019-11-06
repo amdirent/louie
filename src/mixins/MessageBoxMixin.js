@@ -1,3 +1,5 @@
+import update from 'immutability-helper';
+
 const MessageBoxMixin = (Base) => class extends Base {
   state = {
     show_message: false,
