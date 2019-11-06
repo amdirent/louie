@@ -1,0 +1,29 @@
+{
+  "name": "louie",
+  "version": "0.0.1",
+  "description": "Lightweight User Interface for Javascript",
+  "repository": "https://github.com/amdirent/louie.git",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/babel src --out-dir lib"
+  },
+  "author": "Christopher Rankin",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.8.6"
+  },
+  "peerDependencies": {
+    "react": "^16.10.0",
+    "react-dom": "^16.8.6"
+  }
+}
