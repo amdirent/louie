@@ -23,7 +23,7 @@ export default class MessageBoxComponent extends React.PureComponent {
       MessageComponent = (props) => (
         <div className={Object.keys(ml)[0]}>
           <h2>{message.header}</h2>
-          <p>{message.body}</p>
+          { message.body && <p>{message.body}</p> }
         </div>
       );
 
