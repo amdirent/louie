@@ -26,13 +26,13 @@ export default class LoadingComponent extends React.PureComponent {
     //  this.setState(newState);
     //});
     Promise.all(promises).then((results) => {
-      let newState = {loaded: true};
+      let newState = {};
 
       for (let i=0; i<=results.length; i++) {
         newState = {...newState, ...results[i]}
       }
 
-      this.setState(newState);
+      this.setState({...newState, ...{loaded: true}});
     });
   }
 
