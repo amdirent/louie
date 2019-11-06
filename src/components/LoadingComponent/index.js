@@ -13,21 +13,6 @@ export default class LoadingComponent extends React.PureComponent {
     this.loading = this.loading.bind(this);
   }
 
-  /*
-   *
-    componentDidMount() {
-      super.componentDidMount(() => {
-        return api.call().then((resp) => {
-          const updateState = {
-            field1: resp.data.field1,
-            field2: resp.data.field2
-          }
-    
-          return updateState;
-        });
-      });
-    }
-   */
   /**
    * Should be called from child class via super.componentDidMount(p). Method 
    * accepts promise which should resolve to a new state object with which to 
@@ -35,9 +20,18 @@ export default class LoadingComponent extends React.PureComponent {
    * 
    * @param {Promise} promise - Promise to retrieve data resolving to new state.
    */
-  componentDidMount(promise) {
-    promise.then((result) => {
-      const newState = {...result, ...{loaded: true}};
+  componentDidMount(promises) {
+    //promise.then((result) => {
+    //  const newState = {...result, ...{loaded: true}};
+    //  this.setState(newState);
+    //});
+    Promise.all(promises).then((results) => {
+      let newState = {loaded: true};
+
+      for (let i=0; i<=results.length; i++) {
+        newState = {...newState, ...results[i]}
+      }
+
       this.setState(newState);
     });
   }
