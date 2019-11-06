@@ -1,2 +1,3 @@
 export {default as LoadingComponent} from './components/LoadingComponent';
-export {default as MessageBoxMixin} from './mixins/MessageBoxMixin.js';
+export {default as MessageBoxComponent} from './components/MessageBoxComponent';
+export {default as MessageBoxMixin} from './mixins/MessageBox.js';
