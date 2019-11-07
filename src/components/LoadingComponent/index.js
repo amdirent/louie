@@ -11,6 +11,9 @@ export default class LoadingComponent extends React.PureComponent {
 
     this.loaded = this.loaded.bind(this);
     this.loading = this.loading.bind(this);
+    this.showLoader = this.showLoader.bind(this);
+    this.hideLoader = this.hideLoader.bind(this);
+
   }
 
   /**
@@ -34,6 +37,20 @@ export default class LoadingComponent extends React.PureComponent {
 
       this.setState({...newState, ...{loaded: true}});
     });
+  }
+
+  /**
+   * Shows the loading mask
+   */
+  showLoader() {
+    this.setState({loaded: false});
+  }
+
+  /**
+   * Hides the loading mask
+   */
+  hideLoader() {
+    this.setState({loaded: true});
   }
 
   /**
