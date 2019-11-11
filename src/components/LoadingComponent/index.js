@@ -17,17 +17,13 @@ export default class LoadingComponent extends React.PureComponent {
   }
 
   /**
-   * Should be called from child class via super.componentDidMount(p). Method 
-   * accepts promise which should resolve to a new state object with which to 
-   * update the component.
+   * Should be called from child class via super.componentDidMount(promises). 
+   * Method accepts an array of promises each of which should resolve to a new 
+   * state object with which to update the component.
    * 
    * @param {Promise} promise - Promise to retrieve data resolving to new state.
    */
   componentDidMount(promises) {
-    //promise.then((result) => {
-    //  const newState = {...result, ...{loaded: true}};
-    //  this.setState(newState);
-    //});
     Promise.all(promises).then((results) => {
       let newState = {};
 
