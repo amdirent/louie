@@ -18,12 +18,12 @@ const MessageBoxMixin = (Base) => class extends Base {
     }
   }
 
-  componentDidCatch(error, errorInfo) {
-    // Send to external logs.
-    console.log(error, errorInfo);
-    this.showMessage('error', errorInfo);
-    return null;
-  }
+  //componentDidCatch(error, errorInfo) {
+  //  // Send to external logs.
+  //  console.log(error, errorInfo);
+  //  this.showMessage('error', errorInfo);
+  //  return null;
+  //}
 
   clearMessage() {
     const updatedState = update(this.state, {
