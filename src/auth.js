@@ -57,20 +57,24 @@ export default class Auth {
 
   login(username, password, callback) {
     const that = this;
-    this.auth0.client.login(
-      {
-        realm: 'Username-Password-Authentication',
-        username: username,
-        password: password
-      },
-      function(err, authResult) {
-        if (err) {
-          throw err;
-        } else {
-          that.setSession(authResult, callback);
+    try {
+      this.auth0.client.login(
+        {
+          realm: 'Username-Password-Authentication',
+          username: username,
+          password: password
+        },
+        function(err, authResult) {
+          if (err) {
+            throw err;
+          } else {
+            that.setSession(authResult, callback);
+          }
         }
-      }
-    );
+      ); }
+    catch(err) {
+      throw err;
+    }
   }
 
   getCurrentTimestamp() {
