@@ -4,7 +4,8 @@ import Auth from '../../auth.js';
 export default class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
-   
+
+    this.state = {error: null};
     this.auth = new Auth();
     this.handleSubmission = this.handleSubmission.bind(this);
   }
