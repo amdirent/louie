@@ -37,7 +37,7 @@ export default class LoginForm extends React.PureComponent {
         { this.props.logo && <Logo /> }
         <div className="form">
           <form className="login-form" onSubmit={onSubmitHandler}>
-            { this.state.error && <div class='error'>{this.state.error}</div> }
+            { this.state.error && <div className='error'>{this.state.error}</div> }
             <input type="text" placeholder="username" ref="usernameInput"/>
             <input type="password" placeholder="password" ref="passwordInput"/>
             <button>login</button>
