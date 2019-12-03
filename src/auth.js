@@ -23,6 +23,7 @@ export default class Auth {
     sessionStorage.setItem('idToken', authResult.idToken);
     sessionStorage.setItem('scope', authResult.scope);
     sessionStorage.setItem('role', jwtDecode(authResult.idToken)['https://rentbutter.com/roles']);
+    sessionStorage.setItem('accountId', jwtDecode(authResult.idToken)['https://rentbutter.com/accountId']);
 
     if (callback) callback();
 
