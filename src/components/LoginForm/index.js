@@ -1,18 +1,24 @@
 import React, {PureComponent} from 'react';
 
 export default class LoginForm extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmission = this.handleSubmission.bind(this);
+  }
+
+  handleSubmission(e) {
+    if (e) e.preventDefault();
+    console.log(this.refs.usernameInput.value);
+    console.log(this.refs.passwordInput.value);
+  }
+  
   render() {
     const Logo = this.props.logo;
     
-    const defaultSubmissionHandler = function(event) {
-      if (event) event.preventDefault();
-        console.log(this.refs.usernameInput.value);
-        console.log(this.refs.passwordInput.value); 
-    };
-
     const onSubmitHandler = this.props.onSubmit 
       ? this.props.onSubmit 
-      : defaultSubmissionHandler; 
+      : this.handleSubmission; 
 
     return (
       <div className="login-page">
