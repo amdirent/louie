@@ -30,6 +30,8 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "immutability-helper": "^3.0.1"
+    "auth0-js": "^9.11.3",
+    "immutability-helper": "^3.0.1",
+    "jwt-decode": "^2.2.0"
   }
 }
