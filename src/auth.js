@@ -57,6 +57,7 @@ export default class Auth {
 
   login(username, password, callback, errback) {
     const that = this;
+
     this.auth0.client.login(
       {
         realm: 'Username-Password-Authentication',
