@@ -11,6 +11,8 @@ export default class LoginForm extends React.PureComponent {
   }
 
   handleSubmission(e) {
+    const that = this;
+
     if (e) e.preventDefault();
 
     this.auth.login(
@@ -18,7 +20,7 @@ export default class LoginForm extends React.PureComponent {
       this.refs.passwordInput.value,
       this.props.onAuthenticated,
       function(err) {
-        this.setState({error: err.description});
+        that.setState({error: err.description});
       }
     );
   }
