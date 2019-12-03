@@ -6,7 +6,8 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
-    redirectUri: process.env.AUTH0_REDIRECT_URI,
+    //redirectUri: process.env.AUTH0_REDIRECT_URI,
+    redirectUri: process.env.AUTH0_CALLBACK_URL,
     responseType: process.env.AUTH0_RESPONSE_TYPE,
     scope: process.env.AUTH0_SCOPE,
     audience: process.env.AUTH0_API_AUDIENCE
