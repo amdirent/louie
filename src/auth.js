@@ -14,6 +14,7 @@ export default class Auth {
   constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.setSession = this.setSession.bind(this);
   }
 
   setSession(authResult, callback) {
@@ -54,6 +55,7 @@ export default class Auth {
   }
 
   login(username, password, callback) {
+    const that = this;
     this.auth0.client.login(
       {
         realm: 'Username-Password-Authentication',
@@ -61,7 +63,7 @@ export default class Auth {
         password: password
       },
       function(err, authResult) {
-        if (!err) this.setSession(authResult, callback);
+        if (!err) that.setSession(authResult, callback);
         // TODO: Handle error
       }
     );
