@@ -6,8 +6,6 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
-    //redirectUri: process.env.AUTH0_REDIRECT_URI,
-    redirectUri: process.env.AUTH0_CALLBACK_URL,
     responseType: process.env.AUTH0_RESPONSE_TYPE,
     scope: process.env.AUTH0_SCOPE,
     audience: process.env.AUTH0_API_AUDIENCE
@@ -22,23 +20,11 @@ export default class Auth {
   constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    //this.handleAuthentication = this.handleAuthentication.bind(this);
     this.renewSession = this.renewSession.bind(this);
     this.decodeIdToken = this.decodeIdToken.bind(this);
     this.setUser = this.setUser.bind(this);
     this.sendToDashboard = this.sendToDashboard.bind(this);
   }
-
-  //handleAuthentication(successRoute, failuireRoute) {
-  //  this.auth0.parseHash((err, authResult) => {
-  //    if (err) {
-  //      console.log(err)
-  //      history.replace(failuireRoute); // TODO: This should use an environment variable
-  //    } else {
-  //      this.setSession(authResult, successRoute);
-  //    }
-  //  });
-  //}
 
   decodeIdToken(token) {
     if (token) {
@@ -52,19 +38,19 @@ export default class Auth {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  setSession(authResult) {
-    console.log(authResult.refreshToken)
-    this.expiresAt = (authResult.expiresIn) + this.getCurrentTimestamp();
-    this.accessToken = authResult.accessToken;
-    this.idToken = authResult.idToken;
-    this.scope = authResult.scope;
-    this.role = jwtDecode(authResult.idToken)['https://rentbutter.com/roles'];
+  setSession(err, authResult) {
+    //console.log(authResult.refreshToken)
+    //this.expiresAt = (authResult.expiresIn) + this.getCurrentTimestamp();
+    //this.accessToken = authResult.accessToken;
+    //this.idToken = authResult.idToken;
+    //this.scope = authResult.scope;
+    //this.role = jwtDecode(authResult.idToken)['https://rentbutter.com/roles'];
 
     console.log("++++++++++++++++++++++++++")
-    console.log(this)
+    console.log(authResult)
     console.log("++++++++++++++++++++++++++")
 
-    this.sendToDashboard(this.role);
+    //this.sendToDashboard(this.role);
     //this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
     //  console.log(user)
     //  this.setUser(user);
@@ -101,15 +87,14 @@ export default class Auth {
     this.auth0.logout({returnTo: process.env.LOGIN_URL});
   }
 
-  login(username, password, callback) {
-    //this.auth0.authorize({redirectUri: process.env.AUTH0_CALLBACK_URL});
+  login(username, password) {
     this.auth0.client.login(
       {
         realm: 'Username-Password-Authentication',
         username: username,
         password: password
       },
-      callback
+      this.setSession 
     );
   }
 
