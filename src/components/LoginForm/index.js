@@ -12,7 +12,7 @@ export default class LoginForm extends React.PureComponent {
 
     const onSubmitHandler = this.props.onSubmit 
       ? this.props.onSubmit 
-      : defaultSubmissionhandler; 
+      : defaultSubmissionHandler; 
 
     return (
       <div className="login-page">
