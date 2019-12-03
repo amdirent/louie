@@ -6,8 +6,11 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/babel src --out-dir lib"
+    "build": "./node_modules/.bin/babel src --out-dir lib && cp -R ./src/styles ./lib/styles"
   },
+  "files": [
+    "*.css"
+  ],
   "author": "Christopher Rankin",
   "license": "BSD-2-Clause",
   "devDependencies": {

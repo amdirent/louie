@@ -13,7 +13,6 @@ export default class LoadingComponent extends React.PureComponent {
     this.loading = this.loading.bind(this);
     this.showLoader = this.showLoader.bind(this);
     this.hideLoader = this.hideLoader.bind(this);
-
   }
 
   /**
