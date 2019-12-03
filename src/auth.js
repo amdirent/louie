@@ -11,46 +11,20 @@ export default class Auth {
     audience: process.env.AUTH0_API_AUDIENCE
   });
 
-  user = null;
-  expiresAt = null;
-  accessToken = null;
-  idToken = null;
-  scope = null;
-
   constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.renewSession = this.renewSession.bind(this);
-    this.decodeIdToken = this.decodeIdToken.bind(this);
-    this.setUser = this.setUser.bind(this);
-    this.sendToDashboard = this.sendToDashboard.bind(this);
   }
 
-  decodeIdToken(token) {
-    if (token) {
-      return jwtDecode(token);
-    } else {
-      return jwtDecode(localStorage.getItem('idToken'));
-    }
-  }
+  setSession(authResult, callback) {
+    sessionStorage.setItem('expiresAt', (authResult.expiresIn) + this.getCurrentTimestamp());
+    sessionStorage.setItem('accessToken', authResult.accessToken);
+    sessionStorage.setItem('idToken', authResult.idToken);
+    sessionStorage.setItem('scope', authResult.scope);
+    sessionStorage.setItem('role', jwtDecode(authResult.idToken)['https://rentbutter.com/roles']);
 
-  setUser(user) {
-    localStorage.setItem('user', JSON.stringify(user));
-  }
+    if (callback) callback();
 
-  setSession(err, authResult) {
-    //console.log(authResult.refreshToken)
-    //this.expiresAt = (authResult.expiresIn) + this.getCurrentTimestamp();
-    //this.accessToken = authResult.accessToken;
-    //this.idToken = authResult.idToken;
-    //this.scope = authResult.scope;
-    //this.role = jwtDecode(authResult.idToken)['https://rentbutter.com/roles'];
-
-    console.log("++++++++++++++++++++++++++")
-    console.log(authResult)
-    console.log("++++++++++++++++++++++++++")
-
-    //this.sendToDashboard(this.role);
     //this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
     //  console.log(user)
     //  this.setUser(user);
@@ -58,43 +32,38 @@ export default class Auth {
     //});
   }
 
-  sendToDashboard(role) {
-    role === 'admin' ? history.push('/tool/admin/accounts') : history.push('/tool/account-overview');
-  }
-
   // TODO: This code is not working. Look into at some point.
-  renewSession() {
-    this.auth0.checkSession({}, (err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
-      } else if (err) {
-        this.logout();
-      }
-    });
-  }
+  //renewSession() {
+  //  this.auth0.checkSession({}, (err, authResult) => {
+  //    if (authResult && authResult.accessToken && authResult.idToken) {
+  //      this.setSession(authResult);
+  //    } else if (err) {
+  //      this.logout();
+  //    }
+  //  });
+  //}
 
   // Consider expired if this timestamp will expire 600 seconds (10 minutes) from now.
-  isExpired() {
-    return !((this.getCurrentTimestamp() + 600) < this.expiresAt);
-  }
+  //isExpired() {
+  //  return !((this.getCurrentTimestamp() + 600) < this.expiresAt);
+  //}
 
   logout() {
-    this.expiresAt = null;
-    this.accessToken = null;
-    this.idToken = null;
-    this.scope = null;
-
+    sessionStorage.clear();
     this.auth0.logout({returnTo: process.env.LOGIN_URL});
   }
 
-  login(username, password) {
+  login(username, password, callback) {
     this.auth0.client.login(
       {
         realm: 'Username-Password-Authentication',
         username: username,
         password: password
       },
-      this.setSession 
+      function(err, authResult) {
+        if (!err) this.setSession(authResult, callback);
+        // TODO: Handle error
+      }
     );
   }
 
