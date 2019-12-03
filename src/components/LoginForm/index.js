@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 
-class LoginForm extends React.PureComponent {
+export default class LoginForm extends React.PureComponent {
   render() {
     return (
       <div className="login-page">
