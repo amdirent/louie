@@ -64,8 +64,11 @@ export default class Auth {
         password: password
       },
       function(err, authResult) {
-        if (!err) that.setSession(authResult, callback);
-        // TODO: Handle error
+        if (err) {
+          throw err;
+        } else {
+          that.setSession(authResult, callback);
+        }
       }
     );
   }

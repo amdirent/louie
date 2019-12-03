@@ -4,18 +4,22 @@ import Auth from '../../auth.js';
 export default class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
-    
+   
     this.auth = new Auth();
     this.handleSubmission = this.handleSubmission.bind(this);
   }
 
   handleSubmission(e) {
     if (e) e.preventDefault();
+    try {
     this.auth.login(
       this.refs.usernameInput.value, 
       this.refs.passwordInput.value,
       this.props.onAuthenticated
     );
+    } catch(err) {
+      this.setState({error: err.message});
+    }
   }
   
   render() {
@@ -30,6 +34,7 @@ export default class LoginForm extends React.PureComponent {
         { this.props.logo && <Logo /> }
         <div className="form">
           <form className="login-form" onSubmit={onSubmitHandler}>
+            { this.state.error && <div class='error'>{this.state.error}</div> }
             <input type="text" placeholder="username" ref="usernameInput"/>
             <input type="password" placeholder="password" ref="passwordInput"/>
             <button>login</button>
