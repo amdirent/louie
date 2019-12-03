@@ -55,26 +55,22 @@ export default class Auth {
     this.auth0.logout({returnTo: process.env.LOGIN_URL});
   }
 
-  login(username, password, callback) {
+  login(username, password, callback, errback) {
     const that = this;
-    try {
-      this.auth0.client.login(
-        {
-          realm: 'Username-Password-Authentication',
-          username: username,
-          password: password
-        },
-        function(err, authResult) {
-          if (err) {
-            throw err;
-          } else {
-            that.setSession(authResult, callback);
-          }
+    this.auth0.client.login(
+      {
+        realm: 'Username-Password-Authentication',
+        username: username,
+        password: password
+      },
+      function(err, authResult) {
+        if (err) {
+          errback(err);
+        } else {
+          that.setSession(authResult, callback);
         }
-      ); }
-    catch(err) {
-      throw err;
-    }
+      }
+    );
   }
 
   getCurrentTimestamp() {
