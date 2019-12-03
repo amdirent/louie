@@ -2,6 +2,8 @@ import React, {PureComponent} from 'react';
 
 export default class LoginForm extends React.PureComponent {
   render() {
+    const Logo = this.props.logo;
+    
     const submissionHandler = this.props.onSubmit || function(event) {
       if (event) event.preventDefault();
         console.log(this.refs.usernameInput.value);
@@ -10,6 +12,7 @@ export default class LoginForm extends React.PureComponent {
 
     return (
       <div className="login-page">
+        { this.props.logo && <Logo /> }
         <div className="form">
           <form className="login-form" onSubmit={this.props.onSubmit}>
             <input type="text" placeholder="username" ref="usernameInput"/>
