@@ -13,7 +13,18 @@ export default class LoginForm extends React.PureComponent {
     if (e) e.preventDefault();
     console.log(this.refs.usernameInput.value);
     console.log(this.refs.passwordInput.value);
-    this.auth.login(this.refs.usernameInput.value, this.refs.passwordInput.value);
+
+    const cb = function(err, authResult) {
+        console.log("####################################")
+        console.log(authResult);
+        console.log("####################################")
+      }
+
+    this.auth.login(
+      this.refs.usernameInput.value, 
+      this.refs.passwordInput.value,
+      cb
+    );
   }
   
   render() {

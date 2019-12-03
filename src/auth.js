@@ -22,23 +22,23 @@ export default class Auth {
   constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
+    //this.handleAuthentication = this.handleAuthentication.bind(this);
     this.renewSession = this.renewSession.bind(this);
     this.decodeIdToken = this.decodeIdToken.bind(this);
     this.setUser = this.setUser.bind(this);
     this.sendToDashboard = this.sendToDashboard.bind(this);
   }
 
-  handleAuthentication(successRoute, failuireRoute) {
-    this.auth0.parseHash((err, authResult) => {
-      if (err) {
-        console.log(err)
-        history.replace(failuireRoute); // TODO: This should use an environment variable
-      } else {
-        this.setSession(authResult, successRoute);
-      }
-    });
-  }
+  //handleAuthentication(successRoute, failuireRoute) {
+  //  this.auth0.parseHash((err, authResult) => {
+  //    if (err) {
+  //      console.log(err)
+  //      history.replace(failuireRoute); // TODO: This should use an environment variable
+  //    } else {
+  //      this.setSession(authResult, successRoute);
+  //    }
+  //  });
+  //}
 
   decodeIdToken(token) {
     if (token) {
@@ -101,17 +101,15 @@ export default class Auth {
     this.auth0.logout({returnTo: process.env.LOGIN_URL});
   }
 
-  login(username, password) {
+  login(username, password, callback) {
     //this.auth0.authorize({redirectUri: process.env.AUTH0_CALLBACK_URL});
-    this.auth0.login(
+    this.auth0.client.login(
       {
         realm: 'Username-Password-Authentication',
         username: username,
         password: password
       },
-      function(err, authResult) {
-        console.log(authResult);
-      }
+      callback
     );
   }
 
