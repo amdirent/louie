@@ -1,12 +1,12 @@
 {
   "name": "louie",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Lightweight User Interface for Javascript",
   "repository": "https://github.com/amdirent/louie.git",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/babel src --out-dir lib && cp -R ./src/styles ./lib/styles"
+    "build": "./node_modules/.bin/babel src --out-dir lib && rm -rf ./lib/styles && cp -R ./src/styles ./lib/styles"
   },
   "files": [
     "*.css"
