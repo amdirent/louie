@@ -2,6 +2,12 @@ import React, {PureComponent} from 'react';
 
 export default class LoginForm extends React.PureComponent {
   render() {
+    const submissionHandler = this.props.onSubmit || function(event) {
+      if (event) event.preventDefault();
+        console.log(this.refs.usernameInput.value);
+        console.log(this.refs.passwordInput.value); 
+    };
+
     return (
       <div className="login-page">
         <div className="form">
