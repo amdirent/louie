@@ -12,6 +12,7 @@ export default class Logout extends React.PureComponent {
   }
 
   static logout() {
-    this.auth.logout();
+    const auth = new Auth();
+    auth.logout();
   } 
 }
