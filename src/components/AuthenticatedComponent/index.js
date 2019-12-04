@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import LoadingComponent from '../LoadingComponent';
 import Logout from '../Logout';
+import jwtDecode from 'jwt-decode';
 
 export default class AuthenticatedComponent extends LoadingComponent {
   componentDidMount(promises=[]) {
