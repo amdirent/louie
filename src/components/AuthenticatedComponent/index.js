@@ -6,7 +6,7 @@ import jwtDecode from 'jwt-decode';
 export default class AuthenticatedComponent extends LoadingComponent {
   constructor(props) {
     super(props);
-
+let authedUer;
     try {
       const user = jwtDecode(sessionStorage.getItem('idToken'));
       const currentTimestamp = new Date().getTime() / 1000;
@@ -18,12 +18,15 @@ export default class AuthenticatedComponent extends LoadingComponent {
       } else {
         // TODO: Write code to update the accessToken
         //resolve({user: user});
-        this.state.user = user;
+        console.log("^^^^^^^^^^^^^^^ Authed ^^^^^^^^^^^^^^")
+        authedUser = user;
       }
     } catch(e) {
       console.log(e);
       Logout.logout();
     }
+
+    this.state.user = authedUser;
   }
 
   //componentDidMount(promises=[]) {
