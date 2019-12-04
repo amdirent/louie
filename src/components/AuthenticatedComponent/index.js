@@ -10,7 +10,7 @@ let user;
     try {
       const authedUser = jwtDecode(sessionStorage.getItem('idToken'));
       const currentTimestamp = new Date().getTime() / 1000;
-      const expiration = user.exp - 600; // Expired if expiring within 10 mins
+      const expiration = authedUser.exp - 600; // Expired if expiring within 10 mins
       const isExpired = currentTimestamp >= expiration;
 
       if (isExpired) {
