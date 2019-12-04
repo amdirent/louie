@@ -32,7 +32,7 @@ export default class LoginForm extends React.PureComponent {
       : this.handleSubmission; 
 
     this.setState(
-      {buttonText: 'Authenticating...'},
+      {buttonText: 'authenticating...'},
       function() {
         handler(e);
       }
@@ -46,7 +46,7 @@ export default class LoginForm extends React.PureComponent {
       <div className="login-page">
         { this.props.logo && <Logo /> }
         <div className="form">
-          <form className="login-form" onSubmit={onFormSubmit}>
+          <form className="login-form" onSubmit={this.onFormSubmit}>
             { this.state.error && <div className='error'>{this.state.error}</div> }
             <input type="text" placeholder="username" ref="usernameInput"/>
             <input type="password" placeholder="password" ref="passwordInput"/>
