@@ -8,7 +8,9 @@ export default class AuthenticatedComponent extends LoadingComponent {
     const verifySession = new Promise(function(resolve) {
       try {
         const user = jwtDecode(sessionStorage.getItem('idToken'));
-        const isExpired = !((new Date().getTime() / 1000) < (user.exp - 600));
+        const currentTimestamp = new Date().getTime() / 1000;
+        const expiration = user.exp - 600;
+        const isExpired = currentTimestamp >= expiration;
 
         if (isExpired) {
           throw "User's session has expired";
