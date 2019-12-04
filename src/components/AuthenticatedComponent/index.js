@@ -9,6 +9,7 @@ export default class AuthenticatedComponent extends LoadingComponent {
         const user = jwtDecode(sessionStorage.getItem('idToken'));
         resolve({user: user});
       } catch(e) {
+        console.log(e);
         Logout.logout();
       }
     });
