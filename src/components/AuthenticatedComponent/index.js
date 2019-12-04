@@ -6,9 +6,9 @@ import jwtDecode from 'jwt-decode';
 export default class AuthenticatedComponent extends LoadingComponent {
   constructor(props) {
     super(props);
-let authedUer;
+let user;
     try {
-      const user = jwtDecode(sessionStorage.getItem('idToken'));
+      const authedUser = jwtDecode(sessionStorage.getItem('idToken'));
       const currentTimestamp = new Date().getTime() / 1000;
       const expiration = user.exp - 600; // Expired if expiring within 10 mins
       const isExpired = currentTimestamp >= expiration;
@@ -19,14 +19,14 @@ let authedUer;
         // TODO: Write code to update the accessToken
         //resolve({user: user});
         console.log("^^^^^^^^^^^^^^^ Authed ^^^^^^^^^^^^^^")
-        authedUser = user;
+        user = authedUser;
       }
     } catch(e) {
       console.log(e);
       Logout.logout();
     }
 
-    this.state.user = authedUser;
+    this.state.user = user;
   }
 
   //componentDidMount(promises=[]) {
