@@ -29,9 +29,7 @@ const verifyUser = () => {
 };
 
 export default class AuthenticatedComponent extends LoadingComponent {
-  state = {
-    user: verifyUser()
-  };
+  state = { user: verifyUser() };
   //constructor(props) {
   //  super(props);
   //  console.log(verifyUser());
