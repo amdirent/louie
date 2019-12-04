@@ -14,8 +14,6 @@ export default class LoginForm extends React.PureComponent {
   handleSubmission(e) {
     const that = this;
 
-    if (e) e.preventDefault();
-
     this.auth.login(
       this.refs.usernameInput.value, 
       this.refs.passwordInput.value,
@@ -27,6 +25,8 @@ export default class LoginForm extends React.PureComponent {
   }
 
   onFormSubmit(e) {
+    if (e) e.preventDefault();
+
     const handler = this.props.onSubmit 
       ? this.props.onSubmit 
       : this.handleSubmission; 
