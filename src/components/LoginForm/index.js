@@ -5,9 +5,10 @@ export default class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {error: null};
+    this.state = {error: null, buttonText: 'login'};
     this.auth = new Auth();
     this.handleSubmission = this.handleSubmission.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   handleSubmission(e) {
@@ -24,23 +25,32 @@ export default class LoginForm extends React.PureComponent {
       }
     );
   }
+
+  onFormSubmit(e) {
+    const handler = this.props.onSubmit 
+      ? this.props.onSubmit 
+      : this.handleSubmission; 
+
+    this.setState(
+      {buttonText: 'Authenticating...'},
+      function() {
+        handler(e);
+      }
+    );
+  }
   
   render() {
     const Logo = this.props.logo;
     
-    const onSubmitHandler = this.props.onSubmit 
-      ? this.props.onSubmit 
-      : this.handleSubmission; 
-
     return (
       <div className="login-page">
         { this.props.logo && <Logo /> }
         <div className="form">
-          <form className="login-form" onSubmit={onSubmitHandler}>
+          <form className="login-form" onSubmit={onFormSubmit}>
             { this.state.error && <div className='error'>{this.state.error}</div> }
             <input type="text" placeholder="username" ref="usernameInput"/>
             <input type="password" placeholder="password" ref="passwordInput"/>
-            <button>login</button>
+            <button>{this.state.buttonText}</button>
             <p className="message">
               Forgot password? <a href="#">Request a reset.</a>
             </p>
