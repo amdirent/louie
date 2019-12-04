@@ -6,7 +6,9 @@ import jwtDecode from 'jwt-decode';
 export default class AuthenticatedComponent extends LoadingComponent {
   constructor(props) {
     super(props);
-    this.state.user = 'Butter'
+    this.state = {
+      user: 'butter'
+    };
 //let user;
 //    try {
 //      const authedUser = jwtDecode(sessionStorage.getItem('idToken'));
