@@ -31,7 +31,7 @@ const verifyUser = () => {
 export default class AuthenticatedComponent extends LoadingComponent {
   constructor(props) {
     super(props);
-    console.log(verifyUser);
+    console.log(verifyUser());
   }
 
   //componentDidMount(promises=[]) {
