@@ -29,10 +29,13 @@ const verifyUser = () => {
 };
 
 export default class AuthenticatedComponent extends LoadingComponent {
-  constructor(props) {
-    super(props);
-    console.log(verifyUser());
-  }
+  state = {
+    user: verifyUser()
+  };
+  //constructor(props) {
+  //  super(props);
+  //  console.log(verifyUser());
+  //}
 
   //componentDidMount(promises=[]) {
   //  const verifySession = new Promise(function(resolve) {
