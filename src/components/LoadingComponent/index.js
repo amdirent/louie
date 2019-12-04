@@ -22,7 +22,7 @@ export default class LoadingComponent extends React.PureComponent {
    * 
    * @param {Promise} promise - Promise to retrieve data resolving to new state.
    */
-  componentDidMount(promises) {
+  componentDidMount(promises=[]) {
     Promise.all(promises).then((results) => {
       let newState = {};
 

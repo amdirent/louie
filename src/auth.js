@@ -26,29 +26,7 @@ export default class Auth {
     sessionStorage.setItem('accountId', jwtDecode(authResult.idToken)['https://rentbutter.com/accountId']);
 
     if (callback) callback();
-
-    //this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
-    //  console.log(user)
-    //  this.setUser(user);
-    //  this.sendToDashboard(user['https://rentbutter.com/roles']);
-    //});
   }
-
-  // TODO: This code is not working. Look into at some point.
-  //renewSession() {
-  //  this.auth0.checkSession({}, (err, authResult) => {
-  //    if (authResult && authResult.accessToken && authResult.idToken) {
-  //      this.setSession(authResult);
-  //    } else if (err) {
-  //      this.logout();
-  //    }
-  //  });
-  //}
-
-  // Consider expired if this timestamp will expire 600 seconds (10 minutes) from now.
-  //isExpired() {
-  //  return !((this.getCurrentTimestamp() + 600) < this.expiresAt);
-  //}
 
   logout() {
     sessionStorage.clear();

@@ -15,7 +15,7 @@ export default class AuthenticatedComponent extends LoadingComponent {
         if (isExpired) {
           throw "User's session has expired";
         } else {
-          // Write code to update the accessToken
+          // TODO: Write code to update the accessToken
           resolve({user: user});
         }
       } catch(e) {
