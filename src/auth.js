@@ -1,7 +1,7 @@
 import auth0 from 'auth0-js';
 import jwtDecode from 'jwt-decode';
 
-export default class Auth {
+export default class Auth0 {
 
   auth0 = new auth0.WebAuth({
     domain: process.env.AUTH0_DOMAIN,
@@ -15,6 +15,7 @@ export default class Auth {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.setSession = this.setSession.bind(this);
+    this.refreshToken = this.refreshToken.bind(this);
   }
 
   setSession(authResult, callback) {
@@ -54,6 +55,21 @@ export default class Auth {
 
   getCurrentTimestamp() {
     return (new Date().getTime() / 1000);
+  }
+
+  refreshToken(callback, errback) {
+   this.auth0.checkSession(
+     {
+       prompt: 'none'
+     },
+     function(err, authResult) {
+      if (err) {
+          errback(err);
+        } else {
+          that.setSession(authResult, callback);
+        }
+     }
+   ); 
   }
 
   verifySession() {

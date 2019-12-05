@@ -1,18 +1,18 @@
 import React, {PureComponent} from 'react';
-import Auth from '../../auth.js';
+//import Auth from '../../auth.js';
 
 export default class Logout extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.auth = new Auth();
+    //this.auth = new Auth();
   }
 
   componentDidMount() {
-    this.auth.logout();
+    this.props.auth.logout();
   }
 
-  static logout() {
-    const auth = new Auth();
-    auth.logout();
-  } 
+  //static logout() {
+  //  const auth = new Auth();
+  //  auth.logout();
+  //} 
 }

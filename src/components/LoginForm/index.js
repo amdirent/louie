@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
-import Auth from '../../auth.js';
+//import Auth0 from '../../auth0.js';
 
 export default class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {error: null, buttonText: 'login'};
-    this.auth = new Auth();
+    //this.auth = //new Auth0();
     this.handleSubmission = this.handleSubmission.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
@@ -14,7 +14,7 @@ export default class LoginForm extends React.PureComponent {
   handleSubmission(e) {
     const that = this;
 
-    this.auth.login(
+    this.props.auth.login(
       this.refs.usernameInput.value, 
       this.refs.passwordInput.value,
       this.props.onAuthenticated, // Success callback
