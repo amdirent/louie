@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 export default class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
-
+console.log(props);
     this.state = {error: null, buttonText: 'login'};
     //this.auth = //new Auth0();
     this.handleSubmission = this.handleSubmission.bind(this);
