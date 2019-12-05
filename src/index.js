@@ -1,4 +1,4 @@
-export {default as Auth0} from './auth0';
+export {default as Auth0} from './auth0.js';
 export {default as LoginForm} from './components/LoginForm';
 export {default as Logout} from './components/Logout';
 export {default as LoadingComponent} from './components/LoadingComponent';
