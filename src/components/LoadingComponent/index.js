@@ -23,6 +23,8 @@ export default class LoadingComponent extends React.PureComponent {
    * @param {Promise} promise - Promise to retrieve data resolving to new state.
    */
   componentDidMount(promises) {
+    console.log("GOT Called")
+    console.log(promises)
     if (!promises) {
       this.setState({loaded: true});
     } else {
