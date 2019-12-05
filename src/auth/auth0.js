@@ -16,6 +16,8 @@ export default class Auth0 {
     this.logout = this.logout.bind(this);
     this.setSession = this.setSession.bind(this);
     this.refreshToken = this.refreshToken.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.getAccessToken = this.getAccessToken.bind(this);
   }
 
   setSession(authResult, callback) {
@@ -94,5 +96,13 @@ export default class Auth0 {
 
     return user;
   };
+
+  getUser() {
+    return jwtDecode(sessionStorage.getItem('idToken'));
+  }
+
+  getAccessToken() {
+    return sessionStorage.getItem('accessToken');
+  }
 
 }
