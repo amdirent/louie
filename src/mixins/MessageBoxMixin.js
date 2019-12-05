@@ -1,10 +1,17 @@
 import update from 'immutability-helper';
 
 const MessageBoxMixin = (Base) => class extends Base {
-  state = {
-    show_message: false,
-    message_level: null,
-    message: { header: null, body: null }
+  //state = {
+  //  show_message: false,
+  //  message_level: null,
+  //  message: { header: null, body: null }
+  //}
+
+  constructor(props) {
+    super(props);
+    this.state.show_message = false;
+    this.state.message_level = null;
+    this.state.message = { header: null, body: null };
   }
 
   static getDerivedStateFromError(error) {
