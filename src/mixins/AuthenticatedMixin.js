@@ -1,4 +1,4 @@
-import Auth from '../auth0.js';
+import Auth from '../auth/auth0.js';
 
 const AuthenticatedMixin = (Base) => class extends Base {
   constructor(props) {
