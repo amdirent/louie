@@ -25,7 +25,10 @@
 //};
 
 const AuthenticatedMixin = (Base) => class extends Base {
-  state = { user: 'Butter' };
+  constructor(props) {
+    super(props);
+    this.state.user = 'Chicken';
+  }
 }
 
 export default AuthenticatedMixin;
