@@ -8,7 +8,8 @@ export default class Auth0 {
     clientID: process.env.AUTH0_CLIENT_ID,
     responseType: process.env.AUTH0_RESPONSE_TYPE,
     scope: process.env.AUTH0_SCOPE,
-    audience: process.env.AUTH0_API_AUDIENCE
+    audience: process.env.AUTH0_API_AUDIENCE,
+    redirectUri: process.env.AUTH0_REDIRECT_URI
   });
 
   constructor() {
