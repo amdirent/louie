@@ -61,10 +61,7 @@ export default class Auth0 {
 
   refreshToken(callback, errback) {
    this.auth0.checkSession(
-     {
-       redirectUri: process.env.AUTH0_REDIRECT_URI,
-       prompt: 'none'
-     },
+     {},
      function(err, authResult) {
       if (err) {
           if (errback)
