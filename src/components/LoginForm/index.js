@@ -1,12 +1,9 @@
 import React, {PureComponent} from 'react';
-//import Auth0 from '../../auth0.js';
 
 export default class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
-console.log(props);
     this.state = {error: null, buttonText: 'login'};
-    //this.auth = //new Auth0();
     this.handleSubmission = this.handleSubmission.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }

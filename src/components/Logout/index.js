@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-//import Auth from '../../auth.js';
 
 export default class Logout extends React.PureComponent {
   constructor(props) {
@@ -10,9 +9,4 @@ export default class Logout extends React.PureComponent {
   componentDidMount() {
     this.props.auth.logout();
   }
-
-  //static logout() {
-  //  const auth = new Auth();
-  //  auth.logout();
-  //} 
 }
