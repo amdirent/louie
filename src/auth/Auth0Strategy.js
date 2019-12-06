@@ -1,14 +1,15 @@
 import auth0 from 'auth0-js';
 import jwtDecode from 'jwt-decode';
 
-export default class Auth0 {
+export default class Auth0Strategy {
 
   auth0 = new auth0.WebAuth({
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
     responseType: process.env.AUTH0_RESPONSE_TYPE,
     scope: process.env.AUTH0_SCOPE,
-    audience: process.env.AUTH0_API_AUDIENCE
+    audience: process.env.AUTH0_API_AUDIENCE,
+    redirectUri: process.env.AUTH0_REDIRECT_URI
   });
 
   constructor() {
@@ -61,12 +62,11 @@ export default class Auth0 {
 
   refreshToken(callback, errback) {
    this.auth0.checkSession(
-     {
-       prompt: 'none'
-     },
+     {},
      function(err, authResult) {
       if (err) {
-          errback(err);
+          if (errback)
+            errback(err);
         } else {
           that.setSession(authResult, callback);
         }

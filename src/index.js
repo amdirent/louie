@@ -1,4 +1,5 @@
-export {default as Auth0} from './auth/auth0.js';
+export {default as Auth0Strategy} from './auth/Auth0Strategy.js';
+export {default as AuthContext} from './auth/AuthContext.js';
 export {default as LoginForm} from './components/LoginForm';
 export {default as Logout} from './components/Logout';
 export {default as LoadingComponent} from './components/LoadingComponent';
