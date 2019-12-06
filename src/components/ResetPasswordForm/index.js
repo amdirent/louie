@@ -12,10 +12,8 @@ export default class ResetPasswordForm extends React.PureComponent {
     const that = this;
 
     this.props.auth.changePassword(
-      {
-        connection: 'Username-Password-Authentication',
-        email: this.refs.usernameInput.value,
-      },
+      'Username-Password-Authentication',
+      this.refs.usernameInput.value,
       function(err, resp) {
         if (err) {
           that.setState({error: err.description});

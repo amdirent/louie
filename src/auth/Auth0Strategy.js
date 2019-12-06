@@ -19,6 +19,7 @@ export default class Auth0Strategy {
     this.refreshToken = this.refreshToken.bind(this);
     this.getUser = this.getUser.bind(this);
     this.getAccessToken = this.getAccessToken.bind(this);
+    this.changePassword = this.changePassword.bind(this);
   }
 
   setSession(authResult, callback) {
@@ -103,6 +104,10 @@ export default class Auth0Strategy {
 
   getAccessToken() {
     return sessionStorage.getItem('accessToken');
+  }
+
+  changePassword(connection, email, callback) {
+    this.auth.changePassword({connection: connection, email: email}, callback);
   }
 
 }
