@@ -1,3 +1,4 @@
+import React from 'react';
 import AuthContext from './AuthContext.js';
 
 const AuthConsumerComponent = (props) => (
