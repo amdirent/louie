@@ -49,7 +49,7 @@ export default class LoginForm extends React.PureComponent {
             <input type="password" placeholder="password" ref="passwordInput"/>
             <button>{this.state.buttonText}</button>
             <p className="message">
-              Forgot password? <a href={process.env.RESET_URL}>Request a reset.</a>
+              Forgot password? <a href={process.env.RESET_ROUTE}>Request a reset.</a>
             </p>
           </form>
         </div>
