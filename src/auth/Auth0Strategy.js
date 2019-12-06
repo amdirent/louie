@@ -107,7 +107,7 @@ export default class Auth0Strategy {
   }
 
   changePassword(connection, email, callback) {
-    this.auth.changePassword({connection: connection, email: email}, callback);
+    this.auth0.changePassword({connection: connection, email: email}, callback);
   }
 
 }
