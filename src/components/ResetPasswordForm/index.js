@@ -18,8 +18,8 @@ export default class ResetPasswordForm extends React.PureComponent {
         if (err) {
           that.setState({error: err.description});
         } else {
-          if (this.props.onResetRequestSent) 
-            this.props.onResetRequestSent(resp);
+          if (that.props.onResetRequestSent) 
+            that.props.onResetRequestSent(resp);
         }
       }
     );
@@ -33,7 +33,7 @@ export default class ResetPasswordForm extends React.PureComponent {
       : this.handleSubmission; 
 
     this.setState(
-      {buttonText: 'requesting reset...'},
+      {buttonText: 'reset request sent'},
       function() {
         handler(e);
       }
