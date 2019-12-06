@@ -2,6 +2,7 @@ export {default as Auth0Strategy} from './auth/Auth0Strategy.js';
 export {default as AuthContext} from './auth/AuthContext.js';
 export {default as AuthConsumerComponent} from './auth/AuthConsumerComponent.js';
 export {default as LoginForm} from './components/LoginForm';
+export {default as ResetPasswordForm} from './components/ResetPasswordForm';
 export {default as Logout} from './components/Logout';
 export {default as LoadingComponent} from './components/LoadingComponent';
 export {default as MessageBoxComponent} from './components/MessageBoxComponent';
