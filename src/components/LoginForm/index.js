@@ -16,7 +16,10 @@ export default class LoginForm extends React.PureComponent {
       this.refs.passwordInput.value,
       this.props.onAuthenticated, // Success callback
       function(err) { // Error callback
-        that.setState({error: err.description});
+        that.setState({
+          error: err.description,
+          buttonText: 'login'
+        });
       }
     );
   }
