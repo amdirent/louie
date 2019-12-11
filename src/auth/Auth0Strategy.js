@@ -1,5 +1,6 @@
 import auth0 from 'auth0-js';
 import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 export default class Auth0Strategy {
 
@@ -35,6 +36,8 @@ export default class Auth0Strategy {
 
   logout() {
     sessionStorage.clear();
+    Cookies.remove('id_token');
+    Cookies.remove('access_token');
     this.auth0.logout({returnTo: process.env.LOGIN_URL});
   }
 
@@ -79,7 +82,7 @@ export default class Auth0Strategy {
     let user;
   
     try {
-      const authedUser = jwtDecode(sessionStorage.getItem('idToken'));
+      const authedUser = this.getUser();
       const currentTimestamp = new Date().getTime() / 1000;
       const expiration = authedUser.exp - 600; // Expired if expiring within 10 mins
       const isExpired = currentTimestamp >= expiration;
@@ -99,11 +102,13 @@ export default class Auth0Strategy {
   };
 
   getUser() {
-    return jwtDecode(sessionStorage.getItem('idToken'));
+    const token = sessionStorage.getItem('idToken') || Cookies.get('id_token'); 
+    return jwtDecode(token);
   }
 
   getAccessToken() {
-    return sessionStorage.getItem('accessToken');
+    const token = sessionStorage.getItem('accessToken') || Cookies.get('access_token'); 
+    return token;
   }
 
   changePassword(connection, email, callback) {
