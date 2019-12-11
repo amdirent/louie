@@ -104,8 +104,12 @@ export default class Auth0Strategy {
   };
 
   getUser() {
-    const token = sessionStorage.getItem('idToken') || Cookies.get('id_token'); 
-    return jwtDecode(token);
+    try {
+      const token = sessionStorage.getItem('idToken') || Cookies.get('id_token'); 
+      return jwtDecode(token);
+    } catch(e) {
+      this.logout();      
+    }
   }
 
   getAccessToken() {
