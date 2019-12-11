@@ -31,6 +31,8 @@ export default class Auth0Strategy {
     sessionStorage.setItem('role', jwtDecode(authResult.idToken)['https://rentbutter.com/roles']);
     sessionStorage.setItem('accountId', jwtDecode(authResult.idToken)['https://rentbutter.com/accountId']);
 
+    Cookies.set('id_token', authResult.idToken);
+
     if (callback) callback();
   }
 
