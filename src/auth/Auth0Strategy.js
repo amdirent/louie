@@ -27,8 +27,8 @@ export default class Auth0Strategy {
   clearSession() {
     localStorage.clear();
     sessionStorage.clear();
-    Cookies.remove('id_token');
-    Cookies.remove('access_token');
+    Cookies.remove('id_token', {domain: `${process.env.NODE_ENV === 'development' ? '127.0.0.1' : '.rentbutter.com'}`});
+    Cookies.remove('access_token', {domain: `${process.env.NODE_ENV === 'development' ? '127.0.0.1' : '.rentbutter.com'}`});
   }
 
   setSession(authResult, callback) {
@@ -46,8 +46,8 @@ export default class Auth0Strategy {
 
   logout() {
     sessionStorage.clear();
-    Cookies.remove('id_token');
-    Cookies.remove('access_token');
+    Cookies.remove('id_token', {domain: `${process.env.NODE_ENV === 'development' ? '127.0.0.1' : '.rentbutter.com'}`});
+    Cookies.remove('access_token', {domain: `${process.env.NODE_ENV === 'development' ? '127.0.0.1' : '.rentbutter.com'}`});
     this.auth0.logout({returnTo: process.env.LOGIN_URL});
   }
 
