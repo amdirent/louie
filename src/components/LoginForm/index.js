@@ -50,7 +50,7 @@ export default class LoginForm extends React.PureComponent {
             { this.state.error && <div className='error'>{this.state.error}</div> }
             <input type="text" placeholder="username" ref="usernameInput"/>
             <input type="password" placeholder="password" ref="passwordInput"/>
-            <button loading={this.state.showSpinner}>{this.state.buttonText}</button>
+            <button className={this.state.showSpinner ? 'loading' : ''}>{this.state.buttonText}</button>
             <p className="message">
               Forgot password? <a href={process.env.RESET_ROUTE}>Request a reset.</a>
             </p>
