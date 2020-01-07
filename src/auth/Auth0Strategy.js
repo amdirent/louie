@@ -21,8 +21,7 @@ export default class Auth0Strategy {
     this.getUser = this.getUser.bind(this);
     this.getAccessToken = this.getAccessToken.bind(this);
     this.changePassword = this.changePassword.bind(this);
-
-    this.clearSession();
+    this.clearSession = this.clearSession.bind(this);
   }
 
   clearSession() {
