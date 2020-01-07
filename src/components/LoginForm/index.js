@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react';
 export default class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {error: null, buttonText: 'login'};
+    this.state = {error: null, buttonText: 'login', showSpinner: false};
     this.handleSubmission = this.handleSubmission.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
@@ -32,7 +32,7 @@ export default class LoginForm extends React.PureComponent {
       : this.handleSubmission; 
 
     this.setState(
-      {buttonText: 'authenticating...'},
+      {showSpinner: true, buttonText: 'authenticating...'},
       function() {
         handler(e);
       }
@@ -50,7 +50,7 @@ export default class LoginForm extends React.PureComponent {
             { this.state.error && <div className='error'>{this.state.error}</div> }
             <input type="text" placeholder="username" ref="usernameInput"/>
             <input type="password" placeholder="password" ref="passwordInput"/>
-            <button>{this.state.buttonText}</button>
+            <button loading={this.state.showSpinner}>{this.state.buttonText}</button>
             <p className="message">
               Forgot password? <a href={process.env.RESET_ROUTE}>Request a reset.</a>
             </p>
