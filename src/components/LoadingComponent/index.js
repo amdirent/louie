@@ -35,7 +35,8 @@ export default class LoadingComponent extends React.PureComponent {
           }
 
           this.setState({...newState, ...{loaded: true}});
-        });
+        })
+        .catch((error) => console.log(error));
     }
   }
 
