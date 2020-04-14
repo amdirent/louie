@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 
 export default class MessageBoxComponent extends React.PureComponent {
   render() {
-    let {message, level, MessageComponent=null} = this.props;
+    let {message, level, MessageComponent=null, style} = this.props;
     let ml;
 
     switch(level) {
@@ -21,7 +21,7 @@ export default class MessageBoxComponent extends React.PureComponent {
 
     if (!MessageComponent)
       MessageComponent = (props) => (
-        <div className={Object.keys(ml)[0]}>
+        <div className={Object.keys(ml)[0]} style={style ? style : {}}>
           <h2>{message.header}</h2>
           { message.body && <p>{message.body}</p> }
         </div>
