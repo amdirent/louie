@@ -49,12 +49,8 @@ export default class Search extends React.PureComponent {
         style={style}
         placeholder='Search...'
         onKeyDown={(e) => {
-          let newState = {loading: true};
-
           if (e.key === 'Backspace')
-            newState.deleting = true;
-
-          this.setState(newState);
+            this.setState({deleting: true});
         }}
         onChange={(e) => {
           const query = e.target.value;
