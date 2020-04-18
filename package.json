@@ -32,6 +32,7 @@
   "dependencies": {
     "auth0-js": "^9.11.3",
     "immutability-helper": "^3.0.1",
-    "jwt-decode": "^2.2.0"
+    "jwt-decode": "^2.2.0",
+    "react-virtualized-auto-sizer": "^1.0.2"
   }
 }
