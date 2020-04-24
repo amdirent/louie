@@ -59,7 +59,7 @@ export default class DataWindow extends React.PureComponent {
           const itemsInWindow = Math.round((height / virtualPageHeight) * (buffer * 10)) + itemsInView;
           const window = this.state.items.slice(startIndex, (itemsInWindow + startIndex));
 
-          return children({window, height, itemHeight, virtualPageHeight, itemsInView, itemsInWindow, onPage: (position) => this.onPage(position, itemsInWindow)});
+          return children({window, height, width, itemHeight, virtualPageHeight, itemsInView, itemsInWindow, onPage: (position) => this.onPage(position, itemsInWindow)});
         }}
       </AutoSizer>
     );
