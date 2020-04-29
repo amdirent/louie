@@ -54,7 +54,7 @@ export default class Search extends React.PureComponent {
         }}
         onChange={(e) => {
           const query = e.target.value;
-          const results = filterResults(query, deleting);
+          const results = filterResults(query.toUpperCase(), deleting);
           this.setState({deleting: false}, () => onSearchResults(results));
         }}
       />

@@ -65,3 +65,15 @@ export default class DataWindow extends React.PureComponent {
     );
   }
 }
+
+//<DataWindow buffer={20} itemHeight={35} items={inventory}>
+//  {({window, itemsInWindow, height, onPage}) => (
+//    <Segment style={{overflow: 'auto', height: '100%'}} onScroll={(e) => onPage(e.target.scrollTop)} basic>
+//      <div style={{height: (Math.round(height/itemsInWindow) * inventory.length)}}>
+//        {window.map(({item, style}, idx) => (
+//          <div style={style} key={idx}>{item.id} - {item.unit_address}</div>
+//        ))}
+//      </div>
+//    </Segment>
+//  )}
+//</DataWindow>
