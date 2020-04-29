@@ -28,7 +28,7 @@ export default class Search extends React.PureComponent {
       const results = list.filter(function(q) {
         if (conf['fields']) {
           let match = false;
-          conf.fields.forEach(f => {
+          conf['fields'].forEach(f => {
             const value = q[f];
             if (value && value.includes(query))
               match = true;
