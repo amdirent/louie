@@ -26,7 +26,7 @@ export default class Search extends React.PureComponent {
     const filterResults = (query, useMaster) => {
       const list = (useMaster || query.length === 0) ? masterList: resultSet;
       const results = list.filter(function(q) {
-        if (conf.fields) {
+        if (conf['fields']) {
           let match = false;
           conf.fields.forEach(f => {
             const value = q[f];
