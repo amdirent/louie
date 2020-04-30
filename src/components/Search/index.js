@@ -27,6 +27,7 @@ export default class Search extends React.PureComponent {
       const list = (useMaster || query.length === 0) ? masterList: resultSet;
       const results = list.filter(function(q) {
         if (conf['fields']) {
+          console.log(conf)
           let match = false;
           conf['fields'].forEach(f => {
             const value = q[f];
@@ -36,6 +37,7 @@ export default class Search extends React.PureComponent {
 
           return match;
         } else {
+          console.log("NO fields")
           return q.includes(query);
         }
       });
