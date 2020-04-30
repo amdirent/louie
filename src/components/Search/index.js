@@ -30,7 +30,7 @@ export default class Search extends React.PureComponent {
           let matches = [];
           conf['fields'].forEach(f => {
             const value = q[f];
-            matches.push((value && value.includes(query)) ? true : false)
+            matches.push((value && value.toUpperCase().includes(query.toUpperCase())) ? true : false)
           });
 
           return matches.includes(true);
