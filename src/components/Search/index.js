@@ -15,7 +15,8 @@ export default class Search extends React.PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     return {
-      resultSet: props.resultSet
+      resultSet: props.resultSet,
+      masterList: props.masterList
     }
   }
 
@@ -24,7 +25,7 @@ export default class Search extends React.PureComponent {
     const {style, type} = this.props;
 
     const filterResults = (query, useMaster) => {
-      const list = (useMaster || query.length === 0) ? masterList: resultSet;
+      const list = (useMaster || query.length === 0) ? masterList : resultSet;
       const results = list.filter(function(q) {
         if (conf['fields']) {
           let matches = [];
