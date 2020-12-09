@@ -24,7 +24,7 @@ export default class DataWindow extends React.PureComponent {
         return {
           item: i,
           style: {
-            position: 'absolute',
+            //position: 'absolute',
             left: '0px',
             top: `${idx * props.itemHeight}`,
             height: props.itemHeight,
@@ -53,7 +53,7 @@ export default class DataWindow extends React.PureComponent {
     const {itemHeight, virtualPageHeight, startIndex} = this.state;
 
     return (
-      <AutoSizer style={{height: '100%', width: '100%'}} id='auto-sizer'>
+      <AutoSizer style={{height: '100%', width: '100%'}}>
         {({height, width}) => {
           const itemsInView = Math.round((height) / itemHeight);
           const itemsInWindow = Math.round((height / virtualPageHeight) * (buffer * 10)) + itemsInView;
