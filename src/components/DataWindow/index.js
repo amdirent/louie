@@ -57,7 +57,7 @@ export default class DataWindow extends React.PureComponent {
         {({height, width}) => {
           const itemsInView = Math.round((height) / itemHeight);
           const itemsInWindow = Math.round((height / virtualPageHeight) * (buffer * 10)) + itemsInView;
-          const window = this.state.items.slice(startIndex, (itemsInWindow + startIndex));
+          const window = this.state.items.slice(startIndex, (itemsInWindow + startIndex)); // Look into changing the window size (increase) if the element is being scrolled up. This may fix the issue with empty items rendering at the top of the view.
 
           return children({window, height, width, itemHeight, virtualPageHeight, itemsInView, itemsInWindow, onPage: (position) => this.onPage(position, itemsInWindow)});
         }}
