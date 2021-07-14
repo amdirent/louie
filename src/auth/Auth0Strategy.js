@@ -10,7 +10,8 @@ export default class Auth0Strategy {
     responseType: process.env.AUTH0_RESPONSE_TYPE,
     scope: process.env.AUTH0_SCOPE,
     audience: process.env.AUTH0_API_AUDIENCE,
-    redirectUri: process.env.AUTH0_REDIRECT_URI
+    redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_REDIRECT_PATH
+    // redirectUri: process.env.AUTH0_REDIRECT_URI
   });
 
   constructor() {
