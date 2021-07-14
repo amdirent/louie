@@ -55,7 +55,7 @@ export default class Auth0Strategy {
 
   logout() {
     this.clearSession();
-    this.auth0.logout({returnTo: window.location.hostname + process.env.LOGIN_ROUTE});
+    this.auth0.logout({returnTo: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.LOGIN_ROUTE});
   }
 
   login(username, password, callback, errback) {
