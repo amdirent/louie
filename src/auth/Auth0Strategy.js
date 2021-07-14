@@ -11,7 +11,6 @@ export default class Auth0Strategy {
     scope: process.env.AUTH0_SCOPE,
     audience: process.env.AUTH0_API_AUDIENCE,
     redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_REDIRECT_PATH
-    // redirectUri: process.env.AUTH0_REDIRECT_URI
   });
 
   constructor() {
@@ -86,7 +85,9 @@ export default class Auth0Strategy {
     this.auth0.checkSession(
       {
         audience: process.env.AUTH0_API_AUDIENCE,
-        scope: process.env.AUTH0_SCOPE
+        scope: process.env.AUTH0_SCOPE,
+        responseType: 'token',
+        redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_CALLBACK_PATH
       },
       function(err, authResult) {
         if (err) {
