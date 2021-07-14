@@ -34,8 +34,8 @@ export default class Auth0Strategy {
     localStorage.clear();
     sessionStorage.clear();
 
-    Cookies.remove('id_token', {domain: window.location.hostname});
-    Cookies.remove('access_token', {domain: window.location.hostname});
+    Cookies.remove('idToken', {domain: window.location.hostname});
+    Cookies.remove('accessToken', {domain: window.location.hostname});
     Cookies.remove('expiresAt', {domain: window.location.hostname});
     Cookies.remove('scope', {domain: window.location.hostname});
     Cookies.remove('role', {domain: window.location.hostname});
@@ -126,7 +126,7 @@ export default class Auth0Strategy {
 
   getUser() {
     try {
-      const token = sessionStorage.getItem('idToken') || Cookies.get('id_token');
+      const token = sessionStorage.getItem('idToken') || Cookies.get('idToken');
       return jwtDecode(token);
     } catch(e) {
       this.logout();
@@ -134,7 +134,7 @@ export default class Auth0Strategy {
   }
 
   getAccessToken() {
-    const token = sessionStorage.getItem('accessToken') || Cookies.get('access_token');
+    const token = sessionStorage.getItem('accessToken') || Cookies.get('accessToken');
     return token;
   }
 
