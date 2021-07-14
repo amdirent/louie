@@ -18,7 +18,7 @@ export default class ResetPasswordForm extends React.PureComponent {
         if (err) {
           that.setState({error: err.description});
         } else {
-          if (that.props.onResetRequestSent) 
+          if (that.props.onResetRequestSent)
             that.props.onResetRequestSent(resp);
         }
       }
@@ -28,9 +28,9 @@ export default class ResetPasswordForm extends React.PureComponent {
   onFormSubmit(e) {
     if (e) e.preventDefault();
 
-    const handler = this.props.onSubmit 
-      ? this.props.onSubmit 
-      : this.handleSubmission; 
+    const handler = this.props.onSubmit
+      ? this.props.onSubmit
+      : this.handleSubmission;
 
     this.setState(
       {buttonText: 'reset request sent'},
@@ -39,10 +39,10 @@ export default class ResetPasswordForm extends React.PureComponent {
       }
     );
   }
-  
+
   render() {
     const Logo = this.props.logo;
-    
+
     return (
       <div className="login-page">
         { this.props.logo && <Logo /> }
@@ -52,7 +52,7 @@ export default class ResetPasswordForm extends React.PureComponent {
             <input type="text" placeholder="email" ref="usernameInput"/>
             <button>{this.state.buttonText}</button>
             <p className="message">
-              Ready to logoin? <a href={process.env.LOGIN_URL}>Login Page.</a>
+              Ready to login? <a href={process.env.LOGIN_URL}>Login Page.</a>
             </p>
           </form>
         </div>
