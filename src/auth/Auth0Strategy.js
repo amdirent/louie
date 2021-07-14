@@ -40,9 +40,6 @@ export default class Auth0Strategy {
     Cookies.remove('scope', {domain: window.location.hostname});
     Cookies.remove('role', {domain: window.location.hostname});
     Cookies.remove('accountId', {domain: window.location.hostname});
-
-    //Cookies.remove('id_token', {domain: `${process.env.NODE_ENV === 'development' ? '127.0.0.1' : '.rentbutter.com'}`});
-    //Cookies.remove('access_token', {domain: `${process.env.NODE_ENV === 'development' ? '127.0.0.1' : '.rentbutter.com'}`});
   }
 
   setSession(authResult, callback) {
@@ -53,25 +50,12 @@ export default class Auth0Strategy {
     this.setDataItem('role', jwtDecode(authResult.idToken)['https://rentbutter.com/roles']);
     this.setDataItem('accountId', jwtDecode(authResult.idToken)['https://rentbutter.com/accountId']);
 
-//    sessionStorage.setItem('accessToken', authResult.accessToken);
-//    sessionStorage.setItem('idToken', authResult.idToken);
-//    sessionStorage.setItem('expiresAt', (authResult.expiresIn) + this.getCurrentTimestamp());
-//    sessionStorage.setItem('scope', authResult.scope);
-//    sessionStorage.setItem('role', jwtDecode(authResult.idToken)['https://rentbutter.com/roles']);
-//    sessionStorage.setItem('accountId', jwtDecode(authResult.idToken)['https://rentbutter.com/accountId']);
-//
-//    Cookies.set('id_token', authResult.idToken);
-
     if (callback) callback();
   }
 
   logout() {
-    //sessionStorage.clear();
-    //Cookies.remove('id_token', {domain: `${process.env.NODE_ENV === 'development' ? '127.0.0.1' : '.rentbutter.com'}`});
-    //Cookies.remove('access_token', {domain: `${process.env.NODE_ENV === 'development' ? '127.0.0.1' : '.rentbutter.com'}`});
-
     this.clearSession();
-    this.auth0.logout({returnTo: process.env.LOGIN_URL});
+    this.auth0.logout({returnTo: window.location.hostname + process.env.LOGIN_ROUTE});
   }
 
   login(username, password, callback, errback) {
