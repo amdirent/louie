@@ -41,16 +41,6 @@ export default class Auth0Strategy {
     Cookies.remove('scope', {domain: window.location.hostname});
     Cookies.remove('role', {domain: window.location.hostname});
     Cookies.remove('accountId', {domain: window.location.hostname});
-
-    Cookies.remove('idToken', {domain: '.rentbutter.com'});
-    Cookies.remove('id_token', {domain: '.rentbutter.com'});
-    Cookies.remove('accessToken', {domain: '.rentbutter.com'});
-    Cookies.remove('access_token', {domain: '.rentbutter.com'});
-    Cookies.remove('expiresAt', {domain: '.rentbutter.com'});
-    Cookies.remove('scope', {domain: '.rentbutter.com'});
-    Cookies.remove('role', {domain: '.rentbutter.com'});
-    Cookies.remove('accountId', {domain: '.rentbutter.com'});
-    Cookies.remove('access_token', {domain: '.rentbutter.com'})
   }
 
   setSession(authResult, callback) {
