@@ -34,12 +34,14 @@ export default class Auth0Strategy {
     sessionStorage.clear();
 
     Cookies.remove('idToken', {domain: window.location.hostname});
+    Cookies.remove('id_token', {domain: window.location.hostname});
     Cookies.remove('accessToken', {domain: window.location.hostname});
     Cookies.remove('access_token', {domain: window.location.hostname});
     Cookies.remove('expiresAt', {domain: window.location.hostname});
     Cookies.remove('scope', {domain: window.location.hostname});
     Cookies.remove('role', {domain: window.location.hostname});
     Cookies.remove('accountId', {domain: window.location.hostname});
+    Cookies.remove('access_token', {domain: '.rentbutter.com'})
   }
 
   setSession(authResult, callback) {
