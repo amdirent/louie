@@ -11,7 +11,6 @@ export default class Auth0Strategy {
     scope: process.env.AUTH0_SCOPE,
     audience: process.env.AUTH0_API_AUDIENCE,
     redirectUri: window.location.origin + process.env.AUTH0_REDIRECT_PATH
-    //redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_REDIRECT_PATH
   });
 
   constructor() {
@@ -27,13 +26,10 @@ export default class Auth0Strategy {
   }
 
   setDataItem(key, value) {
-    //sessionStorage.setItem(key, value);
     Cookies.set(key, value);
   }
 
   clearSession() {
-    //sessionStorage.clear();
-
     Cookies.remove('idToken', {domain: window.location.hostname});
     Cookies.remove('id_token', {domain: window.location.hostname});
     Cookies.remove('accessToken', {domain: window.location.hostname});
@@ -59,7 +55,6 @@ export default class Auth0Strategy {
   logout() {
     this.clearSession();
     this.auth0.logout({returnTo: window.location.origin + process.env.LOGIN_ROUTE});
-    //this.auth0.logout({returnTo: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.LOGIN_ROUTE});
   }
 
   login(username, password, callback, errback) {
@@ -85,36 +80,55 @@ export default class Auth0Strategy {
     return (new Date().getTime() / 1000);
   }
 
-  refreshToken(callback, errback) {
-    const logout = this.logout;
+  refreshToken() {
+    const that = this;
 
-    this.auth0.checkSession(
+    return new Promise((resolve, reject) => {
+     that.auth0.checkSession(
       {
         audience: process.env.AUTH0_API_AUDIENCE,
         scope: process.env.AUTH0_SCOPE,
         responseType: 'token',
         redirectUri: window.location.origin + process.env.AUTH0_CALLBACK_PATH
-        //redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_CALLBACK_PATH
       },
       function(err, authResult) {
-        if (err) {
-          if (errback) {
-            errback(err);
-          } else {
-            console.log(err);
-            logout();
-          }
-        } else {
-          this.setSession(authResult, callback);
-        }
+        if (err)
+          reject(err);
+
+        //that.setSession(authResult, callback);
+        resolve(authResult);
       }
     );
+     
+    });
   }
+
+//    this.auth0.checkSession(
+//      {
+//        audience: process.env.AUTH0_API_AUDIENCE,
+//        scope: process.env.AUTH0_SCOPE,
+//        responseType: 'token',
+//        redirectUri: window.location.origin + process.env.AUTH0_CALLBACK_PATH
+//      },
+//      function(err, authResult) {
+//        if (err) {
+//          if (errback) {
+//            errback(err);
+//          } else {
+//            console.log(err);
+//            logout();
+//          }
+//        } else {
+//          this.setSession(authResult, callback);
+//        }
+//      }
+//    );
+//  }
 
   isSessionExpired() {
     const authedUser = this.getUser();
     const currentTimestamp = new Date().getTime() / 1000;
-    const isExpiring = currentTimestamp >= (authedUser.exp - 3600); // Expiring within 1 hour? 
+    const isExpiring = currentTimestamp >= (authedUser.exp - 3600); // >= hour 
     const expired =  currentTimestamp >= authedUser.exp;
 
     if (expired) {
@@ -130,7 +144,6 @@ export default class Auth0Strategy {
 
   getUser() {
     try {
-      //const token = sessionStorage.getItem('idToken') || Cookies.get('idToken');
       const token = Cookies.get('idToken');
       return jwtDecode(token);
     } catch(e) {
@@ -139,7 +152,6 @@ export default class Auth0Strategy {
   }
 
   getAccessToken() {
-    //const token = sessionStorage.getItem('accessToken') || Cookies.get('accessToken');
     const token = Cookies.get('accessToken');
     return token;
   }
