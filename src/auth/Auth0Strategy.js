@@ -80,50 +80,28 @@ export default class Auth0Strategy {
     return (new Date().getTime() / 1000);
   }
 
-  refreshToken() {
-    const that = this;
+  //refreshToken() {
+  //  const that = this;
 
-    return new Promise((resolve, reject) => {
-     that.auth0.checkSession(
-      {
-        //audience: process.env.AUTH0_API_AUDIENCE,
-        //scope: process.env.AUTH0_SCOPE,
-        //responseType: 'token',
-        //redirectUri: window.location.origin + process.env.AUTH0_CALLBACK_PATH
-      },
-      function(err, authResult) {
-        if (err)
-          reject(err);
+  //  return new Promise((resolve, reject) => {
+  //   that.auth0.checkSession(
+  //    {
+  //      //audience: process.env.AUTH0_API_AUDIENCE,
+  //      //scope: process.env.AUTH0_SCOPE,
+  //      //responseType: 'token',
+  //      //redirectUri: window.location.origin + process.env.AUTH0_CALLBACK_PATH
+  //    },
+  //    function(err, authResult) {
+  //      if (err)
+  //        reject(err);
 
-        //that.setSession(authResult, callback);
-        resolve(authResult);
-      }
-    );
-     
-    });
-  }
-
-//    this.auth0.checkSession(
-//      {
-//        audience: process.env.AUTH0_API_AUDIENCE,
-//        scope: process.env.AUTH0_SCOPE,
-//        responseType: 'token',
-//        redirectUri: window.location.origin + process.env.AUTH0_CALLBACK_PATH
-//      },
-//      function(err, authResult) {
-//        if (err) {
-//          if (errback) {
-//            errback(err);
-//          } else {
-//            console.log(err);
-//            logout();
-//          }
-//        } else {
-//          this.setSession(authResult, callback);
-//        }
-//      }
-//    );
-//  }
+  //      //that.setSession(authResult, callback);
+  //      resolve(authResult);
+  //    }
+  //  );
+  //   
+  //  });
+  //}
 
   isSessionExpired() {
     const authedUser = this.getUser();
@@ -131,7 +109,7 @@ export default class Auth0Strategy {
     const isExpiring = currentTimestamp >= (authedUser.exp - 3600); // >= hour 
     const expired =  currentTimestamp >= authedUser.exp;
 
-    if (expired) {
+    if (!authedUser || expired) {
       return true;
     }
 
@@ -147,7 +125,7 @@ export default class Auth0Strategy {
       const token = Cookies.get('idToken');
       return jwtDecode(token);
     } catch(e) {
-      this.logout();
+      return null;
     }
   }
 
