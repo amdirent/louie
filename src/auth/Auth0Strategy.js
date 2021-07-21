@@ -60,7 +60,7 @@ export default class Auth0Strategy {
   login(username, password, callback, errback) {
     const that = this;
 
-    this.auth0.crossOriginAuthentication.login(
+    this.auth0.client.login(
       {
         realm: 'Username-Password-Authentication',
         username: username,
