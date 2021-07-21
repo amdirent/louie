@@ -10,7 +10,8 @@ export default class Auth0Strategy {
     responseType: process.env.AUTH0_RESPONSE_TYPE,
     scope: process.env.AUTH0_SCOPE,
     audience: process.env.AUTH0_API_AUDIENCE,
-    redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_REDIRECT_PATH
+    //redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_REDIRECT_PATH
+    redirectUri: window.location.origin + process.env.AUTH0_REDIRECT_PATH
   });
 
   constructor() {
@@ -56,7 +57,8 @@ export default class Auth0Strategy {
 
   logout() {
     this.clearSession();
-    this.auth0.logout({returnTo: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.LOGIN_ROUTE});
+    this.auth0.logout({returnTo: window.location.origin + process.env.LOGIN_ROUTE});
+    //this.auth0.logout({returnTo: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.LOGIN_ROUTE});
   }
 
   login(username, password, callback, errback) {
