@@ -30,14 +30,20 @@ export default class Auth0Strategy {
   }
 
   clearSession() {
-    Cookies.remove('idToken', {domain: window.location.hostname});
-    Cookies.remove('id_token', {domain: window.location.hostname});
-    Cookies.remove('accessToken', {domain: window.location.hostname});
-    Cookies.remove('access_token', {domain: window.location.hostname});
-    Cookies.remove('expiresAt', {domain: window.location.hostname});
-    Cookies.remove('scope', {domain: window.location.hostname});
-    Cookies.remove('role', {domain: window.location.hostname});
-    Cookies.remove('accountId', {domain: window.location.hostname});
+    console.log("Clearing Cookies");
+    //Cookies.remove('idToken', {domain: window.location.hostname});
+    //Cookies.remove('accessToken', {domain: window.location.hostname});
+    //Cookies.remove('expiresAt', {domain: window.location.hostname});
+    //Cookies.remove('scope', {domain: window.location.hostname});
+    //Cookies.remove('role', {domain: window.location.hostname});
+    //Cookies.remove('accountId', {domain: window.location.hostname});
+
+    Cookies.remove('idToken'); 
+    Cookies.remove('accessToken');
+    Cookies.remove('expiresAt');
+    Cookies.remove('scope');
+    Cookies.remove('role');
+    Cookies.remove('accountId');
   }
 
   setSession(authResult, callback) {
