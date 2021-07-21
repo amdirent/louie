@@ -46,8 +46,8 @@ export default class Auth0Strategy {
     this.setDataItem('idToken', authResult.idToken);
     this.setDataItem('expiresAt', (authResult.expiresIn) + this.getCurrentTimestamp());
     this.setDataItem('scope', authResult.scope);
-    this.setDataItem('role', jwtDecode(authResult.idToken)['https://rentbutter.com/roles']);
-    this.setDataItem('accountId', jwtDecode(authResult.idToken)['https://rentbutter.com/accountId']);
+    this.setDataItem('role', jwtDecode(authResult.idToken)[`${process.env.APP_URI}/roles`]);
+    this.setDataItem('accountId', jwtDecode(authResult.idToken)[`${process.env.APP_URI}/accountId`]);
 
     if (callback) callback();
   }
@@ -132,6 +132,16 @@ export default class Auth0Strategy {
   getAccessToken() {
     const token = Cookies.get('accessToken');
     return token;
+  }
+
+  getRole() {
+    const role = Cookies.get('role');
+    return role;
+  }
+
+  getAccountId() {
+    const accountId = Cookies.get('accountId');
+    return accountId;
   }
 
   changePassword(connection, email, callback) {
