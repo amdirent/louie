@@ -86,6 +86,8 @@ export default class Auth0Strategy {
   }
 
   refreshToken(callback, errback) {
+    const logout = this.logout;
+
     this.auth0.checkSession(
       {
         audience: process.env.AUTH0_API_AUDIENCE,
@@ -100,7 +102,7 @@ export default class Auth0Strategy {
             errback(err);
           } else {
             console.log(err);
-            this.logout();
+            logout();
           }
         } else {
           this.setSession(authResult, callback);
