@@ -17,7 +17,7 @@ export default class Auth0Strategy {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.setSession = this.setSession.bind(this);
-    this.refreshToken = this.refreshToken.bind(this);
+    //this.refreshToken = this.refreshToken.bind(this);
     this.getUser = this.getUser.bind(this);
     this.getAccessToken = this.getAccessToken.bind(this);
     this.changePassword = this.changePassword.bind(this);
@@ -106,16 +106,16 @@ export default class Auth0Strategy {
   isSessionExpired() {
     const authedUser = this.getUser();
     const currentTimestamp = new Date().getTime() / 1000;
-    const isExpiring = currentTimestamp >= (authedUser.exp - 3600); // >= hour 
+    //const isExpiring = currentTimestamp >= (authedUser.exp - 3600); // >= hour 
     const expired =  currentTimestamp >= authedUser.exp;
 
     if (!authedUser || expired) {
       return true;
     }
 
-    if (isExpiring) {
-      this.refreshToken();
-    }
+    //if (isExpiring) {
+    //  this.refreshToken();
+    //}
 
     return false;
   };
