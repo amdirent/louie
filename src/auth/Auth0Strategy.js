@@ -10,8 +10,8 @@ export default class Auth0Strategy {
     responseType: process.env.AUTH0_RESPONSE_TYPE,
     scope: process.env.AUTH0_SCOPE,
     audience: process.env.AUTH0_API_AUDIENCE,
-    //redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_REDIRECT_PATH
     redirectUri: window.location.origin + process.env.AUTH0_REDIRECT_PATH
+    //redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_REDIRECT_PATH
   });
 
   constructor() {
@@ -27,12 +27,12 @@ export default class Auth0Strategy {
   }
 
   setDataItem(key, value) {
-    sessionStorage.setItem(key, value);
+    //sessionStorage.setItem(key, value);
     Cookies.set(key, value);
   }
 
   clearSession() {
-    sessionStorage.clear();
+    //sessionStorage.clear();
 
     Cookies.remove('idToken', {domain: window.location.hostname});
     Cookies.remove('id_token', {domain: window.location.hostname});
@@ -45,6 +45,7 @@ export default class Auth0Strategy {
   }
 
   setSession(authResult, callback) {
+    this.clearSession();
     this.setDataItem('accessToken', authResult.accessToken);
     this.setDataItem('idToken', authResult.idToken);
     this.setDataItem('expiresAt', (authResult.expiresIn) + this.getCurrentTimestamp());
@@ -90,7 +91,8 @@ export default class Auth0Strategy {
         audience: process.env.AUTH0_API_AUDIENCE,
         scope: process.env.AUTH0_SCOPE,
         responseType: 'token',
-        redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_CALLBACK_PATH
+        redirectUri: window.location.origin + process.env.AUTH0_CALLBACK_PATH
+        //redirectUri: (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') + window.location.hostname + process.env.AUTH0_CALLBACK_PATH
       },
       function(err, authResult) {
         if (err) {
@@ -98,6 +100,7 @@ export default class Auth0Strategy {
             errback(err);
           } else {
             console.log(err);
+            this.logout();
           }
         } else {
           this.setSession(authResult, callback);
@@ -106,32 +109,27 @@ export default class Auth0Strategy {
     );
   }
 
-  verifySession() {
-    let user;
+  isSessionExpired() {
+    const authedUser = this.getUser();
+    const currentTimestamp = new Date().getTime() / 1000;
+    const isExpiring = currentTimestamp >= (authedUser.exp - 3600); // Expiring within 1 hour? 
+    const expired =  currentTimestamp >= authedUser.exp;
 
-    try {
-      const authedUser = this.getUser();
-      const currentTimestamp = new Date().getTime() / 1000;
-      const expiration = authedUser.exp - 600; // Expired if expiring within 10 mins
-      const isExpired = currentTimestamp >= expiration;
-
-      if (isExpired) {
-        throw "User's session has expired";
-      } else {
-        // TODO: Write code to update the accessToken
-        user = authedUser;
-      }
-    } catch(e) {
-      console.log(e);
-      this.logout();
+    if (expired) {
+      return true;
     }
 
-    return user;
+    if (isExpiring) {
+      this.refreshToken();
+    }
+
+    return false;
   };
 
   getUser() {
     try {
-      const token = sessionStorage.getItem('idToken') || Cookies.get('idToken');
+      //const token = sessionStorage.getItem('idToken') || Cookies.get('idToken');
+      const token = Cookies.get('idToken');
       return jwtDecode(token);
     } catch(e) {
       this.logout();
@@ -139,7 +137,8 @@ export default class Auth0Strategy {
   }
 
   getAccessToken() {
-    const token = sessionStorage.getItem('accessToken') || Cookies.get('accessToken');
+    //const token = sessionStorage.getItem('accessToken') || Cookies.get('accessToken');
+    const token = Cookies.get('accessToken');
     return token;
   }
 
