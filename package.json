@@ -1,6 +1,6 @@
 {
   "name": "louie",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "Lightweight User Interface for Javascript",
   "repository": "https://github.com/amdirent/louie.git",
   "main": "lib/index.js",
