@@ -86,10 +86,10 @@ export default class Auth0Strategy {
     return new Promise((resolve, reject) => {
      that.auth0.checkSession(
       {
-        audience: process.env.AUTH0_API_AUDIENCE,
-        scope: process.env.AUTH0_SCOPE,
-        responseType: 'token',
-        redirectUri: window.location.origin + process.env.AUTH0_CALLBACK_PATH
+        //audience: process.env.AUTH0_API_AUDIENCE,
+        //scope: process.env.AUTH0_SCOPE,
+        //responseType: 'token',
+        //redirectUri: window.location.origin + process.env.AUTH0_CALLBACK_PATH
       },
       function(err, authResult) {
         if (err)
